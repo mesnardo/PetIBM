@@ -202,6 +202,8 @@ PetscErrorCode DecoupledIBPMSolver::createExtraOperators()
     // create the operator EBNH
     ierr = MatMatMult(
         E, BNH, MAT_INITIAL_MATRIX, PETSC_DEFAULT, &EBNH); CHKERRQ(ierr);
+    ierr = PetscObjectViewFromOptions((PetscObject) EBNH, nullptr,
+                                      "-EBNH_mat_view"); CHKERRQ(ierr);
 
     // destroy temporary PETSc Vec and Mat objects
     ierr = VecDestroy(&RDiag); CHKERRQ(ierr);

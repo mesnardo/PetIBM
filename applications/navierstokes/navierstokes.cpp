@@ -550,6 +550,9 @@ PetscErrorCode NavierStokesSolver::assembleRHSPoisson()
         ierr = VecAssemblyEnd(rhs2); CHKERRQ(ierr);
     }
 
+    ierr = PetscObjectViewFromOptions((PetscObject) rhs2, nullptr,
+                                      "-rhs2_vec_view"); CHKERRQ(ierr);
+
     ierr = PetscLogStagePop(); CHKERRQ(ierr);  // end of stageRHSPoisson
 
     PetscFunctionReturn(0);
