@@ -347,6 +347,8 @@ PetscErrorCode NavierStokesSolver::createOperators()
     // create the Poisson operator: DBNG
     ierr = MatMatMult(
         D, BNG, MAT_INITIAL_MATRIX, PETSC_DEFAULT, &DBNG); CHKERRQ(ierr);
+    ierr = PetscObjectViewFromOptions((PetscObject) DBNG, nullptr,
+                                      "-DBNG_mat_view"); CHKERRQ(ierr);
 
     // set the nullspace of the Poisson system
     ierr = setNullSpace(); CHKERRQ(ierr);
